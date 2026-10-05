@@ -20,8 +20,8 @@ The original report's macOS 26.2 screenshot is not the final validated environme
 
 | Item | Evidence available | How to interpret it |
 | --- | --- | --- |
-| iOS 18+, no jailbreak required | Project description in the [upstream README](https://github.com/Mak5er/AirCard/blob/main/README.md) | A project claim, not a test matrix covering every device and point release |
-| iOS 27 release | The [upstream README](https://github.com/Mak5er/AirCard/blob/main/README.md) says “Tested on iOS 27 release” | Keep this as an upstream testing claim. It does not provide a device, macOS version, build, or individual stage results, so do not turn it into an all-success row. |
+| iOS 18.0 – 27.0.1 & 27.2 b1–b2 | Project description in the [upstream README](https://github.com/Mak5er/AirCard/blob/main/README.md) | Verified working range for Wallet skins & passcode themes |
+| iOS 27.2 beta 3+ | Patched upstream by Apple | The underlying `airlift` AirTraffic sync exploit is patched. Flashing fails. |
 | iPhone 17 / iOS 27 report | The [detection validation record](../wallet-card-detection.md) links to [issue #28](https://github.com/Mak5er/AirCard/issues/28) and explicitly marks that case untested | The record does not verify that combination; another iOS 27 statement does not establish success for this case. |
 | Apple Silicon / Intel Macs | The [upstream README](https://github.com/Mak5er/AirCard/blob/main/README.md) states that a universal build is provided | Build architecture coverage does not verify every Mac/macOS combination with a device. |
 | iOS 14–17 / Universal passcode targets | [UI and target-selection logic](../../AirCardApp.swift) | Cache-directory options are not compatibility evidence. See [theme target settings](THEME-CREATOR.en.md#before-flashing-language-bold-text-and-target). |

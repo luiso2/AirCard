@@ -1156,6 +1156,11 @@ class AppViewModel: ObservableObject {
             } else {
                 self.targetTelephonyVersion = "TelephonyUI-8"
             }
+
+            let parts = verStr.split(separator: ".").compactMap { Int($0) }
+            if (parts.count > 0 && parts[0] > 27) || (parts.count >= 2 && parts[0] == 27 && parts[1] >= 3) {
+                self.log("⚠️ Notice: iOS \(verStr) detected. If this device runs iOS 27.2 beta 3 or newer, Apple has patched the AirTraffic sync exploit. Flashing operations may fail.")
+            }
         }
         
         // 2. Auto-detect language
@@ -4033,7 +4038,7 @@ struct ContentView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    Text("Apple Wallet Skins & Passcode Themes for iOS 18+")
+                    Text("Apple Wallet Skins & Passcode Themes (iOS 18.0 – 27.2 b2)")
                         .font(.caption)
                         .foregroundColor(.secondary)
                     

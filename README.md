@@ -1,12 +1,25 @@
 # AirCard 🎴
 
-> **Apple Wallet Card Skinner & Lockscreen Passcode Themer for iOS 18+ (No Jailbreak Required)**  
-> **Tested on iOS 27 release.**
+> **Apple Wallet Card Skinner & Lockscreen Passcode Themer (No Jailbreak Required)**  
+> **Supports iOS 18.0 – 27.0.1 & iOS 27.2 beta 1–2** (iOS 27.2 beta 3+ patched)  
 > Powered by the `airlift` AirTraffic sync exploit.
 
 <p align="left">
   <a href="https://www.paypal.com/donate/?hosted_button_id=98QRTC2HFRA4Y"><img src="https://img.shields.io/badge/Donate-PayPal-00457C?style=flat-square&logo=paypal" alt="Donate with PayPal" /></a>
 </p>
+
+---
+
+## Compatibility
+
+| iOS Version | Status | Notes |
+| :--- | :--- | :--- |
+| **iOS 18.0 – 27.0.1** | ✅ Supported | Full support for Wallet skins and Lockscreen passcode themes |
+| **iOS 27.2 beta 1 – beta 2** | ✅ Supported | Working |
+| **iOS 27.2 beta 3+** | ❌ Patched | Apple patched the underlying `airlift` exploit. Flashing will not work. |
+
+> [!IMPORTANT]
+> Do not update to **iOS 27.2 beta 3 or newer** if you want to continue using AirCard. The underlying AirTraffic sync exploit was patched by Apple in beta 3.
 
 ---
 
