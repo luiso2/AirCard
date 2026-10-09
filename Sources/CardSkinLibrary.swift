@@ -7,12 +7,11 @@ struct CardSkin: Identifiable {
     let name: String
     let finish: String
     let fileName: String
-    let lastFour: String
 
     static let presets: [CardSkin] = [
-        .init(id: "amex-black", name: "American Express Black", finish: "Centurion · negro", fileName: "amex-black.png", lastFour: "2004"),
-        .init(id: "amex-platinum", name: "American Express Platinum", finish: "Platinum · plata", fileName: "amex-platinum.png", lastFour: "2002"),
-        .init(id: "jp-morgan-palladium", name: "J.P. Morgan Palladium", finish: "Palladium · metal cepillado", fileName: "jp-morgan-palladium.png", lastFour: "0427")
+        .init(id: "amex-black", name: "American Express Black", finish: "Centurion · negro", fileName: "amex-black.png"),
+        .init(id: "amex-platinum", name: "American Express Platinum", finish: "Platinum · plata", fileName: "amex-platinum.png"),
+        .init(id: "jp-morgan-palladium", name: "J.P. Morgan Palladium", finish: "Palladium · metal cepillado", fileName: "jp-morgan-palladium.png")
     ]
 
     func artworkURL() -> URL? {
@@ -34,7 +33,7 @@ struct SkinLibraryPreview: View {
             HStack {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("Tus diseños").font(.title3.bold())
-                    Text("Vista previa con terminaciones de ejemplo")
+                    Text("Carátulas sin números añadidos ni chip")
                         .font(.caption).foregroundStyle(.secondary)
                 }
                 Spacer()
@@ -49,7 +48,7 @@ struct SkinLibraryPreview: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
                         Text(skin.name).font(.system(size: 13, weight: .semibold))
-                        Text("•••• \(skin.lastFour)").font(.caption.monospacedDigit())
+                        Text(skin.finish).font(.caption)
                             .foregroundStyle(.secondary)
                     }
                     .frame(width: 250, alignment: .leading)
@@ -161,7 +160,7 @@ private struct SkinPresetTile: View {
                 .accessibilityLabel("Vista previa de \(skin.name)")
             Text(skin.name).font(.system(size: 13, weight: .semibold)).lineLimit(1)
             Text(skin.finish).font(.caption).foregroundStyle(.secondary)
-            Text("Ejemplo · •••• \(skin.lastFour)").font(.caption.monospacedDigit())
+            Text("Sin números añadidos · sin chip").font(.caption)
                 .foregroundStyle(.secondary)
             Button("Usar este diseño") {
                 if let url = skin.artworkURL() { onSelect(url) }

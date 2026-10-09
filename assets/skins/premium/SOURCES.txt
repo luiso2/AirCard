@@ -5,11 +5,10 @@ Platinum: basada en https://icm.aexp-static.com/Internet/Acquisition/US_en/AppCo
 Palladium: basada en https://creditfirm.net/wp-content/uploads/2022/02/chase-palladium-card.jpeg
 Las carátulas se prepararon con Imagegen a partir de esas referencias.
 
-Terminaciones decorativas de ejemplo: Black 2004; Platinum 2002; Palladium 0427.
+Carátulas sin terminaciones decorativas, puntos de ocultación ni dibujo de chip.
 Las dos American Express muestran 22 debajo de MEMBER SINCE, como ejemplo de 2022.
 La Palladium no lleva MEMBER SINCE.
-No son datos de una cuenta bancaria. Los números incluidos en el PNG permanecerán
-visibles al usarlo como skin; Wallet puede mostrar adicionalmente la terminación real.
+Wallet puede mostrar la terminación real de la tarjeta encima de estas carátulas.
 
 Los archivos son recreaciones visuales para personalización. Los nombres y logotipos
 pertenecen a sus titulares. La licencia MIT del código no concede derechos sobre las
