@@ -62,6 +62,25 @@ struct WalletViewModelTests {
         precondition(relaunched.cards.count == countBeforePreload + 1)
         precondition(relaunched.cards.first(where: { $0.id == c })?.confirmed == true)
         precondition(relaunched.currentVerifiedCards.map(\.id) == [c])
+
+        // A saved artwork must still match its flashed fingerprint on relaunch;
+        // replacing the file at the same path must make it pending again.
+        let skinURL = FileManager.default.temporaryDirectory.appendingPathComponent("aircard-skin-test-\(UUID().uuidString).bin")
+        defer { try? FileManager.default.removeItem(at: skinURL) }
+        try! Data("first artwork".utf8).write(to: skinURL)
+        relaunched.setCardImage(for: c, url: skinURL)
+        let flashedSignature = relaunched.cards.first(where: { $0.id == c })!.skinSignature!
+        let restored = AppViewModel(cardDefaults: defaults, connectOnLaunch: false)
+        restored.activateCardDevice("second-phone")
+        restored.device = DeviceInfo(udid: "second-phone", connected: true)
+        restored.flashedSkins["second-phone|\(c)"] = flashedSignature
+        let restoredCard = restored.cards.first(where: { $0.id == c })!
+        precondition(restoredCard.skinSignature == flashedSignature)
+        precondition(restored.isSkinFlashed(restoredCard))
+        precondition(!restored.cardsNeedingFlash.contains(where: { $0.id == c }))
+        try! Data("corrected artwork".utf8).write(to: skinURL)
+        restored.setCardImage(for: c, url: skinURL)
+        precondition(restored.cardsNeedingFlash.contains(where: { $0.id == c }))
         print("Wallet view model migration, device isolation, repeat scans, skin identity and clear/relaunch passed")
     }
 }

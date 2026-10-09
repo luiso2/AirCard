@@ -68,6 +68,19 @@ struct CardItem: Identifiable, Hashable {
     private(set) var skinSignature: String? = nil
     var displayName: String? = nil
     var confirmed: Bool = false
+
+    init(id: String, isSelected: Bool = true, customImageURL: URL? = nil,
+         customImage: NSImage? = nil, displayName: String? = nil, confirmed: Bool = false) {
+        self.id = id
+        self.isSelected = isSelected
+        self.customImageURL = customImageURL
+        self.customImage = customImage
+        self.displayName = displayName
+        self.confirmed = confirmed
+        // Property observers do not run during initialization. Restore the
+        // signature too, so saved artwork retains its flashed state on launch.
+        self.skinSignature = customImageURL.flatMap(CardItem.signature(of:))
+    }
     
     static func signature(of url: URL) -> String? {
         guard let data = try? Data(contentsOf: url) else { return nil }
