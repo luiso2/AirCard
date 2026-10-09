@@ -11,6 +11,7 @@ struct CardSkin: Identifiable {
     static let presets: [CardSkin] = [
         .init(id: "amex-black", name: "American Express Black", finish: "Centurion · negro", fileName: "amex-black.png"),
         .init(id: "amex-platinum", name: "American Express Platinum", finish: "Platinum · plata", fileName: "amex-platinum.png"),
+        .init(id: "amex-gold", name: "American Express Gold", finish: "Gold · oro", fileName: "amex-gold.png"),
         .init(id: "jp-morgan-palladium", name: "J.P. Morgan Palladium", finish: "Palladium · metal cepillado", fileName: "jp-morgan-palladium.png")
     ]
 
@@ -39,7 +40,7 @@ struct SkinLibraryPreview: View {
                 Spacer()
                 Button("Abrir biblioteca", action: onOpen).buttonStyle(.bordered)
             }
-            HStack(spacing: 20) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 250, maximum: 250))], alignment: .leading, spacing: 20) {
                 ForEach(CardSkin.presets) { skin in
                     VStack(alignment: .leading, spacing: 8) {
                         if let url = skin.artworkURL(), let image = NSImage(contentsOf: url) {
@@ -91,14 +92,14 @@ struct SkinLibraryView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Biblioteca de diseños").font(.title2.bold())
-                    Text("Tus tres carátulas, listas para personalizar Wallet.")
+                    Text("Tus carátulas, listas para personalizar Wallet.")
                         .foregroundStyle(.secondary)
                 }
                 Spacer()
                 Button("Cerrar") { dismiss() }.keyboardShortcut(.cancelAction)
             }
 
-            HStack(spacing: 16) {
+            LazyVGrid(columns: [GridItem(.fixed(236)), GridItem(.fixed(236))], spacing: 20) {
                 ForEach(CardSkin.presets) { skin in
                     SkinPresetTile(skin: skin, canAssign: canAssign) { url in
                         guard canAssign else { return }
@@ -131,7 +132,7 @@ struct SkinLibraryView: View {
             }
         }
         .padding(24)
-        .frame(width: 790)
+        .frame(width: 540)
     }
 
     private func chooseImage() {
