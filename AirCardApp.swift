@@ -2200,6 +2200,7 @@ struct ContentView: View {
     @AppStorage("aircard.dont_show_support_on_launch") private var dontShowSupportOnLaunch: Bool = false
     @State private var showSupportPopup = false
     @State private var showCredits = false
+    @State private var skinLibraryPresentation: SkinLibraryPresentation?
     @State private var creditsSelectedTab = 0
     @State private var dragOffsetStart: CGPoint = .zero
     @State private var dragKeyStartOffsets: [String: CGPoint] = [:]
@@ -2252,8 +2253,12 @@ struct ContentView: View {
             if vm.selectedTab == .walletCards {
                 ScrollView {
                     if vm.cards.isEmpty {
-                        emptyStateView
-                            .padding(.top, 40)
+                        VStack(spacing: 8) {
+                            SkinLibraryPreview {
+                                skinLibraryPresentation = SkinLibraryPresentation(cardID: nil, deviceID: vm.device?.udid)
+                            }
+                            emptyStateView.padding(.top, 8)
+                        }
                     } else {
                         LazyVGrid(
                             columns: [GridItem(.adaptive(minimum: 310, maximum: 360), spacing: 20)],
@@ -2329,6 +2334,9 @@ struct ContentView: View {
         .sheet(isPresented: $vm.showAddCardSheet) {
             addCardSheet
         }
+        .sheet(item: $skinLibraryPresentation) { presentation in
+            SkinLibraryView(vm: vm, presentation: presentation)
+        }
         .onAppear {
             if !dontShowSupportOnLaunch {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
@@ -2359,7 +2367,7 @@ struct ContentView: View {
                     Text("AirCard")
                         .font(.title2)
                         .fontWeight(.bold)
-                    Text("v1.2.6")
+                    Text("v1.2.6.1")
                         .font(.system(size: 10, weight: .bold, design: .rounded))
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
@@ -2519,6 +2527,15 @@ struct ContentView: View {
             }
             .buttonStyle(.bordered)
             .controlSize(.regular)
+
+            Button {
+                skinLibraryPresentation = SkinLibraryPresentation(cardID: nil, deviceID: vm.device?.udid)
+            } label: {
+                Label("Diseños", systemImage: "photo.on.rectangle")
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.regular)
+            .disabled(vm.isFlashing)
             
             if !vm.cards.isEmpty {
                 Button(action: openBulkImagePicker) {
@@ -4166,14 +4183,7 @@ struct ContentView: View {
     }
     
     private func openCardImagePicker(for cardId: String) {
-        let panel = NSOpenPanel()
-        panel.allowedContentTypes = [.image]
-        panel.allowsMultipleSelection = false
-        panel.canChooseDirectories = false
-        panel.message = "Choose a custom skin for card \(cardId.prefix(12))..."
-        if panel.runModal() == .OK, let url = panel.url {
-            vm.setCardImage(for: cardId, url: url)
-        }
+        skinLibraryPresentation = SkinLibraryPresentation(cardID: cardId, deviceID: vm.device?.udid)
     }
     
     private func openBulkImagePicker() {

@@ -1,0 +1,19 @@
+Carátulas de la biblioteca de AirCard
+
+Black: basada en assets/skins/amex-black.png de Mak5er/AirCard, commit 52ba05dca4bdc590672c19d554701f4438e20338.
+Platinum: basada en https://icm.aexp-static.com/Internet/Acquisition/US_en/AppContent/OneSite/category/cardarts/platinum-card.png
+Palladium: basada en https://creditfirm.net/wp-content/uploads/2022/02/chase-palladium-card.jpeg
+Las carátulas se prepararon con Imagegen a partir de esas referencias.
+
+Terminaciones decorativas de ejemplo: Black 2004; Platinum 2002; Palladium 0427.
+Las dos American Express muestran 22 debajo de MEMBER SINCE, como ejemplo de 2022.
+La Palladium no lleva MEMBER SINCE.
+No son datos de una cuenta bancaria. Los números incluidos en el PNG permanecerán
+visibles al usarlo como skin; Wallet puede mostrar adicionalmente la terminación real.
+
+Los archivos son recreaciones visuales para personalización. Los nombres y logotipos
+pertenecen a sus titulares. La licencia MIT del código no concede derechos sobre las
+marcas ni las referencias originales. La app encuadra las imágenes a 1536 × 969.
+
+En AirCard, pulsa Diseños para ver las tres carátulas. Con el iPhone conectado,
+pulsa Scan Cards, elige la tarjeta detectada y usa el diseño. Flash Skins lo aplica.
